@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>線上客服</title>
+    <link rel='stylesheet' href='./css/bootstrop.css' />
+    <link rel='stylesheet' href='./css/online.css' />
+    <link rel="icon" href="./image/logo.png" types="image" sizes="16x16">
+    <!-- modal -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- 泡泡效果 -->
+    <%- include("bubble") %>
+        <div class="row">
+            <div class="col-12">
+                <button class="back" id="back">
+                    <b>回上頁</b>
+                </button>
+            </div>
+        </div>
+        <!-- 線上客服 -->
+        <div class="title">
+            <span style="background-color:orange;border-radius: 10px;padding: 10px;">
+                <b>線上客服</b>
+            </span>
+        </div>
+        <!-- 內容標題 -->
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-4">
+                <p class="onlineTitle"><b>編號</b></p>
+            </div>
+            <div class="col-4">
+                <p class="onlineTitle"><b>留言內容</b></p>
+            </div>
+            <div class="col-4">
+                <p class="onlineTitle"><b>回覆按鈕</b></p>
+            </div>
+        </div>
+        <!-- 客服內容 -->
+        <div class="row onlineContact" style="margin-top: 10px;">
+            <% data.forEach((item ,index)=> { %>
+                <div class="col-4" style="margin-top: 10px;" id="item<%= item.Id%>" name="itemId">
+                    <%= item.Id%>
+                </div>
+                <p class="d-none" id="author<%= item.Id%>">
+                    <%= item.Author%>
+                </p>
+                <div class="col-4" style="margin-top: 10px;" id="postContent<%= item.Id%>">
+                    <%= item.Postcontent%>
+                </div>
+                <div class="col-4" style="margin-top: 10px;">
+                    <button class="btn btn-info replyButton" data-toggle="modal" data-target="#myModal"
+                        onclick="reply(<%= item.Id%>)">
+                        <b id="onlineButton">回覆</b>
+                    </button>
+                </div>
+                <% }) %>
+        </div>
+        <div class="">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content" id="modalContect">
+                        <div class="modal-body">
+                            <div class="modal-title">
+                                <span name="Id"></span>
+                                <span name="Author"></span>
+                                <button data-dismiss="modal" type="button" class="btn btn-danger replyButton"
+                                    id="cancel">
+                                    <b>X</b>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="bg-white" name="postContent"
+                                style="border: black 1px solid;border-radius: 5px;width: 440px;margin-top: -70px;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="col-7 managerReply"><b>管理者回覆：</b></p>
+                        </div>
+                        <div class="row">
+                            <textarea class="col-10 replyTextarea" cols="20" rows="3" placeholder="請輸入回覆內容"
+                                id="replyContent" name="Content"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" id="modalButton" data-dismiss="modal"
+                                onclick="send()" value="Id" name="btn"><b>送出</b></button>
+                            <button type="button" class="btn btn-danger" id="modalButton"
+                                data-dismiss="modal"><b>取消</b></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // 回上頁
+            $('#back').on('click', function () {
+                window.history.back();
+            })
+            // 按下回覆按鈕
+            function reply(Id) {
+                var itemId = $(`#item${Id}`).text();
+                var author = $(`#author${Id}`).text();
+                var postContent = $(`#postContent${Id}`).text();
+                $("textarea[name='Content']").val("");
+                // console.log(postContent);
+                $("span[name='Id']").text(`#${itemId}`)
+                $("button[value='Id']").val(`${itemId}`)
+                $("span[name='Author']").text(`${author}`)
+                $("div[name='postContent']").text(`${postContent}`)
+            }
+            //按下送出按鈕
+            function send() {
+                location.replace(location.href)
+                var itemId = document.getElementById('modalButton').value;
+                $.ajax({
+                    url: "/online",
+                    type: "POST",
+                    data: {
+                        replyContent: $("#replyContent").val(),
+                        replyId: itemId
+                    }
+                })
+            }
+        </script>
+</body>
+
+</html>

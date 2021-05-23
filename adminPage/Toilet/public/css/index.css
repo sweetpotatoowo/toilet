@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* 管理者帳號登入標題 */
+.title {
+    font-size: 70px;
+    text-align: center;
+    margin-top: 20px;
+}
+/* 登入框 */
+.boxLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 0 20px;
+}
+/* 帳號密碼表單 */
+.manager {
+    width: 600px;
+    height: 350px;
+    overflow: hidden;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #999;
+    padding: 20px 0 0 20px;
+}
+/* 登入系統按鈕 */
+#butDef {
+    display: block;
+    margin: 20px auto;
+    font-size: 40px;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    background-color: #00BCD4;
+}
+
+#butDef:hover {
+    color: black
+}
+/* 帳密輸入框 */
+.small {
+    height: 50px;
+    width: 250px;
+    font-size: 48px;
+    text-shadow: 1px 1px 0px #CCC;
+}
+
+.sep {
+    font-size: 48px;
+    margin-top: 10px;
+}
+
+.logo {
+    height: 350px;
+    width: 400px;
+}

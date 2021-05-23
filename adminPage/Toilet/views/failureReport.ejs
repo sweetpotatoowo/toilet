@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>故障回報</title>
+    <link rel='stylesheet' href='./css/bootstrop.css' />
+    <link rel='stylesheet' href='./css/failureReport.css' />
+    <link rel="icon" href="./image/logo.png" types="image" sizes="16x16">
+    <!-- modal -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- 泡泡效果 -->
+    <%- include("bubble") %>
+        <div class="row">
+            <div class="col-12">
+                <button class="back" id="back">
+                    <b>回上頁</b>
+                </button>
+            </div>
+        </div>
+        <!-- 故障回報 -->
+        <div class="title">
+            <span style="background-color:orange;border-radius: 10px;padding: 10px;">
+                <b>故障回報</b>
+            </span>
+        </div>
+        <!-- 內容標題 -->
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-4">
+                <p class="failureTitle"><b>編號</b></p>
+            </div>
+            <div class="col-4">
+                <p class="failureTitle"><b>故障內容</b></p>
+            </div>
+            <div class="col-4">
+                <p class="failureTitle"><b>查詢按鈕</b></p>
+            </div>
+        </div>
+        <!-- 故障內容 -->
+        <div class="row failureContact">
+            <% data.forEach((item)=> { %>
+                <div class="col-4 mt-1">
+                    <%= item.Id%>
+                </div>
+                <div class="col-4 mt-1">
+                    <span>
+                        廁所編號：<%= item.Wcid%>
+                    </span>
+                    <span class="ml-4" id="Status">
+                        <% let toiletStatus;if( item.Status=="2" ){ %>
+                            故障
+                            <% } else if( item.Status=="3" ){ %>
+                                停用
+                                <% }%>
+                                    <%= item.toiletStatus%>
+                    </span>
+                </div>
+                <div class="col-4 mt-1">
+                    <button class="btn btn-info failureButton" data-toggle="modal" data-target="#myModal"
+                        onclick="search('<%= item.Id%>','<%= item.Classification%>','<%= item.Shopname%>','<%= item.Type%>','<%= item.Status%>','<%= item.Reporttime%>')">
+                        <b id="failureButton">查詢</b>
+                    </button>
+                </div>
+                <% }) %>
+        </div>
+        <div class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content" id="modalContect">
+                        <div class="modal-body">
+                            <span id="modal-title">#</span>
+                            <span id="modal-title" name="number">編號</span>
+                            <button type="button" class="btn btn-danger replyButton" id="cancel" data-dismiss="modal">
+                                <b>X</b>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="bg-white toiletFailure">
+                                <p class="ml-3 mt-5" name="toiletName">廁所名字(分類+店名)</p>
+                                <p class="ml-3 mt-5" name="failureItem">故障項目(類型+狀態)</p>
+                                <p class="ml-3 mt-5" name="reportTime">回報時間</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" id="modalButton"
+                                data-dismiss="modal"><b>確認</b></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // 按上頁
+            $('#back').on('click', function () {
+                window.history.back();
+            })
+            // 查詢表單
+            function search(Id, Classification, Shopname, Type, Status, Reporttime) {
+                // console.log(Reporttime);
+                var date = new Date(Reporttime);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var Minute = date.getMinutes();
+                var second= date.getSeconds();
+                var date = `${year}-${month}-${day} ${hour}:${Minute}:${second}`
+                // 資料庫店鋪分類轉換
+                let storeType;
+                if(`${Classification}` == 'A1'){
+                    storeType = '7-ELEVEN';
+                }else if(`${Classification}` == 'A2'){
+                    storeType = 'FamilyMart 全家';
+                }else if(`${Classification}` == 'A3'){
+                    storeType = 'Hi-Life 萊爾富';
+                }else if(`${Classification}` == 'A4'){
+                    storeType = 'OK超商';
+                }else if(`${Classification}` == 'B1'){
+                    storeType = '星巴克 Starbucks';
+                }else if(`${Classification}` == 'B2'){
+                    storeType = '路易莎咖啡';
+                }else if(`${Classification}` == 'C1'){
+                    storeType = '麥當勞 McDonald\'s';
+                }else if(`${Classification}` == 'C2'){
+                    storeType = '肯德基 KFC';
+                }else if(`${Classification}` == 'C2'){
+                    storeType = '摩斯漢堡 MOS BURGER';
+                }else if(`${Classification}` == 'D1'){
+                    storeType = '公家機關';
+                }else if(`${Classification}` == 'E1'){
+                    storeType = '家樂福';
+                }else if(`${Classification}` == 'E2'){
+                    storeType = '愛買';
+                }else if(`${Classification}` == 'E3'){
+                    storeType = '大買家';
+                }else if(`${Classification}` == 'E4'){
+                    storeType = '其他';
+                }else if(`${Classification}` == 'F1'){
+                    storeType = '百貨';
+                }else if(`${Classification}` == 'G1'){
+                    storeType = '加油站';
+                }else if(`${Classification}` == 'H1'){
+                    storeType = '捷運站';
+                }
+                // 資料庫廁所類型轉換
+                let toiletType;
+                if(`${Type}` == 1){
+                    toiletType = '男女廁';
+                }else if(`${Type}` == 2){
+                    toiletType = '無障礙廁所';
+                }else if(`${Type}` == 3){
+                    toiletType = '親子廁所';
+                }else if(`${Type}` == 4){
+                    toiletType = '男女廁+無障礙廁所';
+                }else if(`${Type}` == 5){
+                    toiletType = '男女廁+親子廁所';
+                }else if(`${Type}` == 6){
+                    toiletType = '男女廁+無障礙廁所+親子廁所';
+                }
+                // 資料庫狀態轉換
+                let toiletStatus;
+                if(`${Status}` == 1){
+                    toiletStatus = '正常使用';
+                }else if(`${Status}` == 2){
+                    toiletStatus = '故障';
+                }else if(`${Status}` == 3){
+                    toiletStatus = '停用';
+                }
+                // 編號
+                $("span[name='number']").text(`${Id}`);
+                // 第一行
+                $("p[name='toiletName']").text(`${storeType}` + ' ' + `${Shopname}` + '門市')
+                // 第二行
+                $("p[name='failureItem']").html(`${toiletType}` + ' ' + `<b class="text-danger">${toiletStatus}</b>`)
+                // 第三行
+                $("p[name='reportTime']").html('回報時間：'+"<br>"+`${date}`)
+            }
+        </script>
+</body>
+
+</html>

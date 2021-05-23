@@ -1,0 +1,55 @@
+#Logout,
+#online,
+#failureReport {
+    text-decoration: none;
+}
+
+.LogoutButton {
+    background-color: rgb(255, 120, 10);
+    float: right;
+    font-size: 48px;
+    padding: 10px;
+    margin: 10px 10px 0 0;
+    border-radius: 10px;
+    border: none;
+}
+
+.LogoutButton:hover {
+    background-color:white;
+    opacity: 0.8;
+}
+
+/* 管理者頁面標題 */
+.manTitle {
+    font-size: 72px;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+}
+
+/* 線上客服、新增地圖 */
+.customerService,
+.failureReport {
+    text-align: center;
+}
+
+/* 跳動動畫 */
+.ld-bounce {
+    margin-top: 30px;
+    font-size: 48px;
+}
+
+.logo {
+    height: 200px;
+    width: 200px;
+}
+/* 線上客服、故障回報按鈕 */
+#loginButton:hover {
+    color: brown;
+    background-color: white
+}
+
+#loginButton {
+    color: rgb(83, 78, 78);
+    background-color: rgb(0, 217, 255)
+}

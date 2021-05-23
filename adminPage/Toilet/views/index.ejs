@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset='utf-8'>
+  <title>管理者登入頁面</title>
+  <link rel='stylesheet' href='./css/index.css' />
+  <link rel='stylesheet' href='./css/bootstrop.css' />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="icon" href="./image/logo.png" types="image" sizes="16x16">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- RWD -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- 登入 -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- 泡泡效果 -->
+  <%- include("bubble") %>
+    <div style="margin-top: 40px;">
+      <div class="title">
+        <span style="background-color:orange;border-radius: 10px;padding: 10px;"><b>管理者帳號登入</b></span>
+      </div>
+      <!-- 登入框 -->
+      <div class="row">
+        <div class="col-12 col-sm">
+          <div class="boxLogin">
+            <img class="logo" style="display: inline-block;" src="./image/LOGO.png" alt="">
+            <form action="" method="POST">
+              <div class="manager">
+                <p class="sep">
+                  <label for="Username"><b>管理者帳號：</b></label>
+                  <input class="small" name="Username" type="text" id="Username" required />
+                </p>
+                <p class="sep">
+                  <label for="Password"><b>管理者密碼：</b></label>
+                  <input class="small" name="Password" type="password" id="Password" required />
+                </p>
+                <input type="submit" id="butDef" class="ui-button ui-widget ui-corner-all" value="登入系統" />
+                <div id="errorMessage" style="text-align: center;font-size: 22px;color: red;">
+                  <%- errorMessage %>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(function () {
+        $("#butDef").click(function () {
+          $.ajax({
+            url: "/",
+            type: "POST",
+            data: {
+              Username: $("#Username").val(),
+              Password: $("#Password").val(),
+            }
+          })
+        })
+      });
+    </script>
+</body>
+
+</html>

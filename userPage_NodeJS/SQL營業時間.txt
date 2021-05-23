@@ -1,0 +1,21 @@
+選出
+SELECT *,SUBSTR(Businesshours,1,2) as aa FROM `wc` WHERE Businesshours < "07" ORDER BY Businesshours ASC
+
+SELECT *,SUBSTR(Businesshours,1,2) as startTime ,SUBSTR(Businesshours,6,2) as endTime   FROM `wc` WHERE Businesshours < "07" ORDER BY Businesshours ASC
+
+SELECT * FROM `wc` WHERE Businesshours < "07" ORDER BY Businesshours ASC
+
+選出營業時間07-20
+SELECT *,SUBSTR(Businesshours,6,2) as endTime FROM `wc` WHERE Businesshours > "07" AND SUBSTR(Businesshours,6,2) ="20" ORDER BY Businesshours ASC
+
+選出營業時間06-20
+SELECT * FROM `wc` WHERE SUBSTR(Businesshours,1,2) >= "06" AND SUBSTR(Businesshours,6,2) <="20" ORDER BY Businesshours ASC
+
+選出營業時間17以前開的、17以後關的、抓所有的F >> 889
+SELECT * FROM wc WHERE Businesshours="F" UNION SELECT * FROM wc WHERE SUBSTR(Businesshours,1,2) <= "17" AND SUBSTR(Businesshours,6,2) >="17" ORDER BY Businesshours ASC
+
+選出 >> 889
+SELECT * FROM wc WHERE SUBSTR(Businesshours,1,2) <= "17" AND SUBSTR(Businesshours,6,2) >="17" OR Businesshours ="F" ORDER BY Businesshours ASC
+
+照廁所ID排列
+SELECT * FROM wc WHERE SUBSTR(Businesshours,1,2) <= "17" AND SUBSTR(Businesshours,6,2) >="17" OR Businesshours ="F" ORDER BY Id ASC

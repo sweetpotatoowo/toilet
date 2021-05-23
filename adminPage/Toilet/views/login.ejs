@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理者頁面</title>
+  <link rel='stylesheet' href='./css/login.css' />
+  <link rel='stylesheet' href='./css/bootstrop.css' />
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="./css/loading.css">
+  <link rel="icon" href="./image/logo.png" types="image" sizes="16x16">
+  <!-- RWD -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <!-- 泡泡效果 -->
+  <%- include("bubble") %>
+    <script>
+      // swal({
+      //   title: "登入成功! Sign In Suceesfully!",
+      //   icon: "success",
+      //   button: "OK！",
+      // })
+      function Logout() {
+        location.replace('/')
+      }
+    </script>
+    <div class="row">
+      <div class="col-12">
+        <button class="LogoutButton" id="Logout" onclick="Logout()"><b>登出</b></button>
+      </div>
+    </div>
+    <!-- 管理者頁面標題 -->
+    <div class="row">
+      <div class="col-9 manTitle col-sm">
+        <img class="logo" src="./image/LOGO.png" alt="">
+        <div
+          style="background-color: orange;display: flex;align-items: center;border-radius: 10px;padding: 0 10px 0 10px;">
+          <b>管理者頁面</b>
+        </div>
+      </div>
+    </div>
+    <!-- 線上客服、新增地圖 -->
+    <div class="row">
+      <div class="col-6 customerService">
+        <a href="./online" id="online">
+          <div class="btn btn-outline-info" id="loginButton"
+            style="height: 175px;width:165px; border: 3px solid black;margin: 20px 0 0 120px;text-align: center">
+            <h1 class="ld ld-bounce" style="animation-duration:1.2s;animation-iteration-count:3">
+              <b>線上客服</b>
+            </h1>
+          </div>
+        </a>
+      </div>
+      <div class="col-1 failureReport col-sm">
+        <a href="./failureReport" id="failureReport">
+          <div class="btn btn-outline-info" id="loginButton"
+            style="height: 175px;width:165px;border: 3px solid black;margin: 20px 170px 0 0;text-align: center;">
+            <h1 class="ld ld-bounce" style="animation-duration:1.2s;animation-iteration-count:3">
+              <b>故障回報</b>
+            </h1>
+          </div>
+        </a>
+      </div>
+    </div>
+</body>
+
+</html>

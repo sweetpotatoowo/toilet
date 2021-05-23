@@ -1,0 +1,90 @@
+/* 故障回報標題 */
+.title {
+    font-size: 60px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#back {
+    text-decoration: none;
+}
+
+.back {
+    background-color: rgb(255, 120, 10);
+    float: right;
+    font-size: 48px;
+    padding: 10px;
+    margin: 10px 10px 0 0;
+    border-radius: 10px;
+    border: none;
+}
+
+.back:hover {
+    background-color:white;
+    opacity: 0.8;
+}
+/* 內容標題 */
+.failureTitle {
+    text-align: center;
+    font-size: 48px;
+    margin-top: 10px;
+    background-color: orange;
+    border-radius: 10px;
+    padding: 10px;
+}
+/* 故障內容 */
+.failureContact {
+    text-align: center;
+    border: black 3px solid;
+    padding: 10px;
+    font-size: 40px;
+}
+/* 查詢按鈕 */
+#failureButton {
+    font-size: 38px;
+    color: black;
+}
+
+.failureButton {
+    border-radius: 20px;
+    background-color: cadetblue;
+    opacity: 0.9;
+}
+
+.failureButton:hover {
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+}
+
+/* Modal框"X"按鈕 */
+#cancel {
+    font-size: 20px;
+    margin: -125px 0 0 400px;
+    color: black;
+}
+/* Modal框背景 */
+#modalContect {
+    background-color:rgb(177, 192, 202);
+    width: 500px;
+}
+/* Modal框編號、姓名 */
+#modal-title {
+    font-size: 42px;
+    margin-left: 15px;
+}
+/* Modal框內容 */
+.modal-body {
+    font-size: 38px;
+    margin-left:15px;
+}
+/* Modal框送出、取消 */
+#modalButton {
+    color: black;
+    font-size: 32px;
+}
+/* Modal內容 */
+.toiletFailure{
+    border: black 1px solid;
+    border-radius: 5px;
+    width: 450px;
+    margin-top: -70px;
+}
